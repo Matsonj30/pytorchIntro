@@ -49,7 +49,6 @@ for epoch in range(3):
         x, y = data
         network.zero_grad() #sets gradients to zero before loss calculation so it doesn't accumulate
         output = network(x.view(-1, 784)) #pass in reshaped batch which is our input -> AUTOMATICALLY calls forward within the nn.Module __call__ but includes hooks which can be important?
-        print(output)
         loss = F.nll_loss(output, y) #use nloss if not one hot output, use meansqurederror otherwise
         loss.backward() #Literal backpropagation so easy
         optimizer.step() #adjusts the weights for us 
@@ -66,6 +65,7 @@ with torch.no_grad():#This is just for testing, we do not want to adjust
                 correct += 1
             total += 1
 print(f"Accuracy: ", round(correct/total, 3)) 
+
 
 #3 values to 2 values
 
